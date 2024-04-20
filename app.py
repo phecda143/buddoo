@@ -10,6 +10,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(50), unique=True, nullable=False)
+    password = db.Column(db.String(50), nullable=False)
 
 
 with app.app_context():
@@ -20,9 +21,10 @@ with app.app_context():
 def registration():
     if request.method == 'POST':
         username = request.form['username']
+        password = request.form['password']
         email = request.form['email']
 
-        new_user = User(username=username, email=email)
+        new_user = User(username=username, email=email, password=password)
         db.session.add(new_user)
         db.session.commit()
 
