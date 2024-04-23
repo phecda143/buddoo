@@ -63,7 +63,7 @@ def login():
         user = cursor.fetchone()
 
         if user:
-            if str(password) == str(user[2]):
+            if str(password) == str(user[3]):
                 conn.close()
                 return 'successful'
             else:
