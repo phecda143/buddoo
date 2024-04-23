@@ -1,19 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Регистрация</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
 </head>
 <body>
-    <h1>Форма Регистрации</h1>
-    <form method="POST" action="/">
-        <label for="username">Имя пользователя:</label><br>
-        <input type="text" id="username" name="username" required><br>
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password" required><br>
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" required><br>
-        <input type="submit" value="Зарегистрироваться">
-    </form>
+    <a href="/register">Авторизоваться</a>
+    <a href="/login">Войти</a>
 </body>
 </html>

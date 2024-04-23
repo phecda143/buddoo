@@ -1,41 +1,79 @@
-from flask import Flask, render_template, request, redirect
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, request, render_template, redirect
+import sqlite3
+
+# создание и подключение к базе данных
+conn = sqlite3.connect('users.db')
+cursor = conn.cursor()
+
+# создание таблицы для хранения пользователей
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        login TEXT NOT NULL,
+        email TEXT NOT NULL UNIQUE,
+        password TEXT NOT NULL
+    )
+''')
+
+conn.commit()
+conn.close()
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
-db = SQLAlchemy(app)
 
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50), nullable=False)
-    email = db.Column(db.String(50), unique=True, nullable=False)
-    password = db.Column(db.String(50), unique=False, nullable=False)
-
-
-with app.app_context():
-    db.create_all()
-
-
-@app.route('/', methods=['GET', 'POST'])
-def registration():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        email = request.form['email']
-
-        new_user = User(username=username, email=email, password=password)
-        db.session.add(new_user)
-        db.session.commit()
-
-        return redirect('/success')
-
+# главная страница со ссылками на авторизацию и вход
+@app.route('/')
+def index():
     return render_template('index.html')
 
 
-@app.route('/success')
-def success():
-    return 'Registration Successful!'
+# авторизация
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        login = request.form['login']
+        email = request.form['email']
+        password = request.form['password']
+
+        conn = sqlite3.connect('users.db')
+        cursor = conn.cursor()
+
+        try:
+            cursor.execute("INSERT INTO users (login, email, password) VALUES (?, ?, ?)", (login, email, password))
+            conn.commit()
+            conn.close()
+            return 'successful'
+        except sqlite3.IntegrityError:
+            return 'Такая почта уже зарегистрирована на сайте'
+
+    return render_template('register.html')
+
+
+# вход
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+
+        conn = sqlite3.connect('users.db')
+        cursor = conn.cursor()
+
+        cursor.execute("SELECT * FROM users WHERE email=?", (email,))
+        user = cursor.fetchone()
+
+        if user:
+            if str(password) == str(user[2]):
+                conn.close()
+                return 'successful'
+            else:
+                conn.close()
+                return 'Неверный пароль'
+        else:
+            conn.close()
+            return 'Вы не авторизованы, пожалуйста вернитесь на главную страницу'
+
+    return render_template('login.html')
 
 
 if __name__ == '__main__':
