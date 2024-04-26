@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Регистрация</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='/registration.css') }}">    <!-- Путь к файлу стилей -->
 </head>
 <body>
+<div class="container">
     <form action="/register" method="post">
-        <input type="text" name="login" placeholder="Логин" required><br>
-        <input type="email" name="email" placeholder="Почта" required><br>
-        <input type="password" name="password" placeholder="Пароль" required><br>
-        <button type="submit">Зарегистрироваться</button>
+        <input type="text" class="registration-form" name="login" placeholder="Логин" required><br>
+        <input type="email" class="registration-form"  name="email" placeholder="Почта" required><br>
+        <input type="password" class="registration-form"  name="password" placeholder="Пароль" required><br>
+        <button type="submit" class="registration-form">Зарегистрироваться</button>
     </form>
+</div>
 </body>
 </html>

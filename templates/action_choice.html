@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>-
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/action_choice.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Выберите действие</h2>
+        <div class="links">
+            <a href="/register" class="auth-link">Регистрация</a>
+            <a href="/login" class="auth-link">Вход</a>
+        </div>
+    </div>
+</body>
+</html>
