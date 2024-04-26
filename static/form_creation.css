@@ -1,0 +1,149 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.brown-bg {
+    background-color: #806b5b;
+}
+
+.beige-bg {
+    background-color: #806b5b;
+}
+
+header {
+    background-color: #483e37;
+    color: #806b5b;
+    padding: 20px;
+    font-size: 20px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+nav ul li a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ba9a82;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 0px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #806b5b;
+}
+
+.profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.centered-form {
+    width: 100%;
+    max-width: 800px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #f8e5d8;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.left-section {
+    width: 45%;
+}
+
+.right-section {
+    width: 45%;
+}
+
+.photo {
+    text-align: center;
+}
+
+.photo img {
+    max-width: 200px;
+    max-height: 200px;
+    border: 10px solid #483e37;
+    border-radius: 0px;
+}
+
+.info {
+    margin-left: 20px;
+}
+
+.bio {
+    margin-top: 20px;
+    text-align: center;
+    min-height: 500px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+form input[type='text'],
+form input[type='number'],
+form select,
+form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    box-sizing: border-box;
+}
+
+from input[type='choice'] {
+width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    box-sizing: border-box;
+}
+
+form input[type='submit'] {
+    background-color: #483e37;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form input[type='url'] {
+    background-color: #483e37;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form input[type='submit']:hover {
+    background-color: #342d28;
+}
+
+.text-danger {
+    color: red;
+}

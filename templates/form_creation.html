@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Моя анкета</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/form_creation.css') }}">
+</head>
+<body class="brown-bg">
+<header>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('all_forms') }}">Лента</a></li>
+            <li><a href="#">Моя анкета</a></li>
+            <li><a href="#">Настройки</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="profile beige-bg">
+    <form method="POST" action="{{ url_for('my_form') }}" enctype="multipart/form-data" class="centered-form">
+        {{ form.hidden_tag() }}
+        <div class="container">
+            <div class="left-section">
+                <div class="photo">
+                    {{ form.picture.label() }}
+                    {{ form.picture(class="form-control form-control-lg") }}
+                    {% if form.picture.errors %}
+                        {% for error in form.picture.errors %}
+                            <span class="text-danger">{{ error }}</span><br>
+                        {% endfor %}
+                    {% endif %}
+                    <br><br>
+                    <img class="photo" src="{{ image_file }}" alt="Profile Picture">
+                </div>
+                <div class="info">
+                    <label for="age">Возраст:</label>
+                    {{ form.age(id='age', type='number', min='14') }}
+
+                    <label for="gender">Пол:</label>
+                    {{ form.gender(id='gender', type='choice') }}
+
+                    <label for="reqs">Ищу:</label>
+                    {{ form.reqs(id='reqs') }}
+
+                    <label for="media">Соц. сеть:</label>
+                    {{ form.media(id='media', type='url') }}
+                </div>
+            </div>
+            <div class="right-section">
+                <div class="bio">
+                    <label> Имя:</label>
+                    {{ form.name(id='name') }}
+                    <label for="about">О себе:</label>
+                    {{ form.about(id='about') }}
+
+                    {{ form.submit() }}
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{{ url_for('static', filename='/all_forms.css') }}">
+<head>
+    <meta charset="UTF-8">
+    <style>
+   .colortext {
+    color: black;
+   }
+  </style>
+        <header>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('all_forms') }}">Лента</a></li>
+            <li><a href="{{ url_for('my_form') }}">Моя анкета</a></li>
+            <li><a href="#">Настройки</a></li>
+        </ul>
+    </nav>
+</header>
+
+<body>
+    <div class="arrow-left">&#10094;</div>
+    <div class="arrow-right">&#10095;</div>
+    <div class="scroll-container">
+        <div class="container">
+            <!-- Добавляем пустой элемент для отступа -->
+            <div style="width: 50px;"></div>
+            {% for profile in profiles %}
+                <div class="form">
+                    <h2>Имя: {{ profile.name }}</h2>
+                    <img src="{{ profile.picture }}" alt="Фото профиля">
+                    <p>Возраст: {{ profile.age }}</p>
+                    <p>Пол: {{ profile.gender }}</p>
+                    <p>Ищет: {{ profile.reqs }}</p>
+                    <label style="color: black"> Соц.сеть:</label>
+                    <a href="{{ profile.media }}" class="button-like-link">Перейти</a>
+                    <p>О себе: {{ profile.about }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+<script>
+
+    const container = document.querySelector('.container');
+    const arrowLeft = document.querySelector('.arrow-left');
+    const arrowRight = document.querySelector('.arrow-right');
+    let scrollValue = 0;
+
+    arrowLeft.addEventListener('click', function() {
+        scrollValue -= 300;
+        container.scrollTo({
+            left: scrollValue,
+            behavior: 'smooth'
+        });
+    });
+
+    arrowRight.addEventListener('click', function() {
+        scrollValue += 300;
+        container.scrollTo({
+            left: scrollValue,
+            behavior: 'smooth'
+        });
+    });
+</script>
+<p class="colortext">Joke of the day: {{ joke }}</p>
+
+</body>
+</html>
